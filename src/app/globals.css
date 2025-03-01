@@ -17,6 +17,13 @@
   }
 } */
 
+* {
+  /* margin: 0;
+  padding: 0; */
+  /* box-sizing: border-box; */
+  /* outline: 0.5px solid black; */
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
