@@ -10,6 +10,10 @@ const Jobs = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const jobData = [{
+    
+  }];
+
   // Modal state
   const [showModal, setShowModal] = useState(false);
 
@@ -161,7 +165,7 @@ const Jobs = () => {
       {/* Job Listings */}
       {!loading && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredJobs.length > 0 ? (
+          {/* {filteredJobs.length > 0 ? (
             filteredJobs.map((job) => <JobCard key={job._id} job={job} />)
           ) : (
             <div className="text-center col-span-3 text-gray-500">
@@ -170,7 +174,7 @@ const Jobs = () => {
                 Try searching for a different job title.
               </p>
             </div>
-          )}
+          )} */}
         </div>
       )}
 
