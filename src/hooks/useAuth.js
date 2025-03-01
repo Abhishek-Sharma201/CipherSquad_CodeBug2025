@@ -18,13 +18,18 @@ export const useAuth = () => {
           credentials: "include",
         });
 
+        const data = await response.json();
+
         if (response.ok) {
-          const data = await response.json();
           setIsAuthenticated(true);
           setUser(data.user);
+        } else {
+          setIsAuthenticated(false);
+          setUser(null);
         }
       } catch (error) {
-        console.error("Auth check failed:", error);
+        setIsAuthenticated(false);
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -37,18 +42,12 @@ export const useAuth = () => {
     try {
       const response = await fetch(`${apiURL}/api/auth/signup`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
-      if (response.status === 409)
-        return { success: response.success, message: response.message };
-
-      const data = await response.json();
-
-      return data;
+      return await response.json();
     } catch (error) {
       return { success: false, message: "Signup failed." };
     }
@@ -58,23 +57,21 @@ export const useAuth = () => {
     try {
       const response = await fetch(`${apiURL}/api/auth/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
       const data = await response.json();
 
       if (data.success) {
         setIsAuthenticated(true);
-        setUser(data.user); // Set user info
-        document.cookie = `token=${data.token}; path=/;`;
+        setUser(data.user);
       }
 
       return data;
     } catch (error) {
-      return { success: false, message: "Login failed" };
+      return { success: false, message: "Login Failed" };
     }
   };
 
@@ -82,9 +79,6 @@ export const useAuth = () => {
     try {
       const response = await fetch(`${apiURL}/api/auth/logout`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
       });
 
@@ -93,13 +87,11 @@ export const useAuth = () => {
       if (data.success) {
         setIsAuthenticated(false);
         setUser(null);
-        document.cookie =
-          "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
       }
 
       return data;
     } catch (error) {
-      return { success: false, message: "Logout failed" };
+      return { success: false, message: "Logout Failed" };
     }
   };
 
