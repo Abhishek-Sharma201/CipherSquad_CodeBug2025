@@ -15,7 +15,7 @@ const Jobs = () => {
       try {
         const res = await fetch(`${apiURL}/api/job/get`);
         if (!res.ok) {
-          throw new Error("Failed to fetch jobs");
+          throw new Error("Failed to fetch Jobs");
         }
         const data = await res.json();
         if (Array.isArray(data.jobs)) {
