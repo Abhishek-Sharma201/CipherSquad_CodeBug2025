@@ -8,14 +8,26 @@ import {
   Bookmark as BookmarkSimple,
   Eye,
   Send,
+  GraduationCap,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SideBar = ({ activeTab, setActiveTab }) => {
   const { user, logout, isAuthenticated } = useAuth();
+  const Router = useRouter();
+  const { pathname } = Router;
+
   const router = useRouter();
+
+  const targetRoute =
+    pathname === "/student"
+      ? "/hr"
+      : pathname === "/hr"
+      ? "/student"
+      : "/hr";
 
   const handleClick = async () => {
     const res = await logout();
@@ -30,9 +42,15 @@ const SideBar = ({ activeTab, setActiveTab }) => {
   return (
     <div className="w-60 bg-white h-screen border-r border-gray-200">
       <div className="p-4">
-        <div className="flex items-center justify-center mb-6">
+        {/* <div className="flex items-center justify-center mb-6">
           <div className="bg-indigo-600 text-white font-bold text-2xl p-2 rounded">
             <span>JG</span>
+          </div>
+        </div> */}
+        <div className="flex items-center bg-white rounded-xl shadow-md mb-[1rem]">
+          <div className="text-indigo-600 font-bold text-[1.2rem] flex items-center ">
+            <GraduationCap className="h-8 w-8 mr-2" />
+            <span>Campus Hire</span>
           </div>
         </div>
 
@@ -59,7 +77,7 @@ const SideBar = ({ activeTab, setActiveTab }) => {
           <ul className="space-y-1">
             <li
               onClick={() => setActiveTab("Dashboard")}
-              className={`flex items-center space-x-3 p-3 rounded-lg ${
+              className={` cursor-pointer flex items-center space-x-3 p-3 rounded-lg ${
                 activeTab == "Dashboard"
                   ? "bg-blue-50 text-blue-600"
                   : "text-gray-700 hover:bg-gray-100"
@@ -70,7 +88,7 @@ const SideBar = ({ activeTab, setActiveTab }) => {
             </li>
             <li
               onClick={() => setActiveTab("Jobs")}
-              className={`flex items-center space-x-3 p-3 rounded-lg ${
+              className={` cursor-pointer flex items-center space-x-3 p-3 rounded-lg ${
                 activeTab == "Jobs"
                   ? "bg-blue-50 text-blue-600"
                   : "text-gray-700 hover:bg-gray-100"
@@ -81,7 +99,7 @@ const SideBar = ({ activeTab, setActiveTab }) => {
             </li>
             <li
               onClick={() => setActiveTab("Messages")}
-              className={`flex items-center space-x-3 p-3 rounded-lg ${
+              className={` cursor-pointer flex items-center space-x-3 p-3 rounded-lg ${
                 activeTab == "Messages"
                   ? "bg-blue-50 text-blue-600"
                   : "text-gray-700 hover:bg-gray-100"
@@ -92,7 +110,7 @@ const SideBar = ({ activeTab, setActiveTab }) => {
             </li>
             <li
               onClick={() => setActiveTab("Profile")}
-              className={`flex items-center space-x-3 p-3 rounded-lg ${
+              className={` cursor-pointer flex items-center space-x-3 p-3 rounded-lg ${
                 activeTab == "Profile"
                   ? "bg-blue-50 text-blue-600"
                   : "text-gray-700 hover:bg-gray-100"
@@ -101,7 +119,7 @@ const SideBar = ({ activeTab, setActiveTab }) => {
               <User size={20} />
               <span>Profile</span>
             </li>
-            <li
+            {/* <li
               onClick={() => setActiveTab("Settings")}
               className={`flex items-center space-x-3 p-3 rounded-lg ${
                 activeTab == "Settings"
@@ -111,12 +129,18 @@ const SideBar = ({ activeTab, setActiveTab }) => {
             >
               <Settings size={20} />
               <span>Settings</span>
-            </li>
+            </li> */}
           </ul>
         </nav>
+        <Link
+          href={targetRoute}
+          className=" ml-[3.5rem] mt-[14rem] text-[.9rem] text-white bg-yellow-500 rounded-md px-2 py-1 self-center cursor-pointer"
+        >
+          Switch
+        </Link>
         <button
           onClick={handleClick}
-          className=" mt-[5rem] text-[.9rem] text-white bg-red-600 rounded-md px-2 py-1 self-center cursor-pointer "
+          className=" ml-[3.5rem] mt-[18rem] text-[.9rem] text-white bg-red-600 rounded-md px-2 py-1 self-center cursor-pointer "
         >
           Logout
         </button>

@@ -1,11 +1,18 @@
+"use client";
 import React from "react";
+import Navbar from "./Welcome/Navbar";
+import Main from "./Welcome/Main";
+import Footer from "./Welcome/Footer";
 
-const Hero = () => {
+
+function Page() {
   return (
-    <div className=" h-[100dvh] w-full flex flex-col items-center justify-center ">
-      Hero
-    </div>
+    <>
+      <Navbar />
+      <Main />
+      <Footer />
+    </>
   );
-};
+}
 
-export default Hero;
+export default Page;

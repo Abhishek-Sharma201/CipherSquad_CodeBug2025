@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const JobCard = ({ job }) => {
@@ -19,9 +20,12 @@ const JobCard = ({ job }) => {
           </span>
         ))}
       </div>
-      <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+      <Link
+        href={`/student/${job._id}`}
+        className="mt-[2rem] px-2 w-full text-[.6rem] bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+      >
         Apply Now
-      </button>
+      </Link>
     </div>
   );
 };

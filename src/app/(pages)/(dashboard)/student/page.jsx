@@ -20,8 +20,8 @@ const page = () => {
         return <Jobs />;
       case "Messages":
         return <Messages />;
-      case "Settings":
-        return <Settings />;
+      // case "Settings":
+      //   return <Settings />;
 
       default:
         return <Dashboard />;
